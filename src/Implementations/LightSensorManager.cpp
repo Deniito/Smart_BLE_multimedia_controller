@@ -10,6 +10,7 @@ bool LightSensorManager::begin()
     {
         return false; // Return false if the sensor is not found
     }
+    lastReadTime = 30000;
     return true; // Return true if initialization is successful
 }
 

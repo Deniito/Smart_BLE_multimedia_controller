@@ -1,15 +1,19 @@
 #pragma once
 
+#include "FS.h"
+#include "SPIFFS.h"
+#include <SD.h>
+#include <M5Dial.h>
+
+#include <unordered_map>
+#include <memory>
+#include <string>
+
 #include "headers/MainMenu.h"
 #include "headers/MenuState.h"
 #include "headers/InputManager.h"
 #include "headers/MediaControlMenu.h"
 #include "headers/TempHumidMenu.h"
-
-#include <M5Dial.h>
-#include <unordered_map>
-#include <memory>
-#include <string>
 
 class DisplayManager {
 private:

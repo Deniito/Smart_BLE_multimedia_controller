@@ -70,8 +70,8 @@ void DisplayManager::clearScreen() {
 
 void DisplayManager::showMessage(const std::string& message, int y_offset) {
     int x = 120, y = 160 + y_offset, height = 20, radius = 8;
-    uint16_t rectColor = M5.Lcd.color565(100, 47, 18);
-    uint16_t textColor = M5.Lcd.color565(100, 95, 92);
+    uint16_t rectColor = M5.Lcd.color565(187, 72, 10);
+    uint16_t textColor = M5.Lcd.color565(55, 55, 55);
 
     M5Dial.Lcd.setTextSize(2);
     M5Dial.Lcd.setTextColor(textColor);

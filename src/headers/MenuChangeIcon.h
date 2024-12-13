@@ -1,23 +1,25 @@
 #pragma once
-#include "RenderObject.h"
+
 #include <string>
 #include <vector>
+
+#include "RenderObject.h"
+
 
 class DisplayManager;
 
 class MenuChangeIcon : public RenderObject {
 private:
     std::string newMenuName;
-    std::string imagePath;
-    int radius;
 public:
-    MenuChangeIcon(int x, int y, int radius, uint16_t color, const std::string& imagePath, const std::string newMenuName);
-
-    void render() override;
+    MenuChangeIcon(int x, int y, int radius, uint16_t color, uint16_t backgroundColor, 
+                   const std::string& imagePath, const std::string& selectedImagePath, 
+                   const std::string& newMenuName);
+                   
+    MenuChangeIcon(int x, int y, int radius, const std::string& imagePath, 
+                   const std::string& selectedImagePath, const std::string& newMenuName);
 
     void use(DisplayManager& displayManager) override;
-
-    void increaseSize(int amount) override;
 
     int getRadius() const;
 

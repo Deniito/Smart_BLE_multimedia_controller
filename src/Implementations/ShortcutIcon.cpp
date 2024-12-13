@@ -1,27 +1,25 @@
 #include "headers/ShortcutIcon.h"
 
-ShortcutIcon::ShortcutIcon(int x, int y, int radius, uint16_t color, const std::string& imagePath, const std::vector<unsigned int>& customKeys)
-    : RenderObject(x, y, color), radius(radius), imagePath(imagePath), keys(customKeys), bluetoothManager(BluetoothManager::getInstance()) {
+ShortcutIcon::ShortcutIcon(int x, int y, int radius, uint16_t mainColor, uint16_t backgroundColor, 
+                               const std::string& imagePath, const std::string& selectedImagePath, 
+                               const std::vector<unsigned int>& customKeys)
+    : RenderObject(x, y, radius, mainColor, backgroundColor, imagePath, selectedImagePath), // Initialize base class
+      keys(customKeys), 
+      bluetoothManager(BluetoothManager::getInstance()) // Initialize BluetoothManager instance
+{
 }
 
-void ShortcutIcon::render() {
-    if (isSelected()) {
-        M5.Lcd.fillCircle(x, y, radius+5, M5Dial.Lcd.color565(100, 100, 100));
-    } else {
-        M5.Lcd.fillCircle(x, y, radius, M5Dial.Lcd.color565(100, 100, 100));
-
-    }
-
-    // Draw the image inside the circle (Placeholder: using fillRect for now)
-    // Center the image within the circle using radius
-    M5.Lcd.fillRect(x-(radius/2), y-(radius/2), radius, radius, M5.Lcd.color565(255, 0, 0));  // Placeholder for the image
+ShortcutIcon::ShortcutIcon(int x, int y, int radius, const std::string& imagePath, 
+                           const std::string& selectedImagePath, 
+                           const std::vector<unsigned int>& customKeys)
+    : RenderObject(x, y, radius, imagePath, selectedImagePath), // Initialize base class with image paths
+      keys(customKeys), 
+      bluetoothManager(BluetoothManager::getInstance()) // Initialize BluetoothManager instance
+{
 }
 
 void ShortcutIcon::use(DisplayManager& displayManager) {
     bluetoothManager.sendKeyPress(keys);
-}
-void ShortcutIcon::increaseSize(int amount) {
-    radius += amount;
 }
 
 int ShortcutIcon::getRadius() const {

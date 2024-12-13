@@ -1,5 +1,4 @@
-#ifndef LIGHT_SENSOR_MANAGER_H
-#define LIGHT_SENSOR_MANAGER_H
+#pragma once
 
 #include "Adafruit_VEML7700.h"
 
@@ -38,5 +37,3 @@ public:
     // Get the current integration time as a string
     String getIntegrationTime();
 };
-
-#endif // LIGHT_SENSOR_MANAGER_H

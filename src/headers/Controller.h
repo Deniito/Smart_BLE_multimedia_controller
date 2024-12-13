@@ -1,11 +1,14 @@
 #pragma once
 
-#include <BleKeyboard.h>
-
+#include "FS.h"
+#include "SPIFFS.h"
+#include <SD.h>
+#include <M5Dial.h>
 
 #include <vector>
 #include <string>
 
+#include <BleKeyboard.h>
 #include "DisplayManager.h"
 #include "BluetoothManager.h"
 #include "MotionSensorManager.h"

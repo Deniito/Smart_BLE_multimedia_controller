@@ -13,13 +13,15 @@ void TempHumidMenu::initialize(DisplayManager &displayManager)
 
     renderObjects.push_back(std::make_shared<MenuChangeIcon>(
             120, 220, 15,
-            M5.Lcd.color565(0, 255, 0), 
-            "/icons/icon" + std::to_string(2 + 1) + ".bmp",
+            "/Back_not_selected.png",
+            "/Back_selected.png",
             "MainMenu"));
 
     renderObjects.push_back(std::make_shared<TempTextCircle>(
-            120, 120, 55, 
-            "C", -273.15));
+        120, 100, 70,  // x, y, radius
+        "C",           // text
+        -273.15        // isCelsius (this should be a temperature value, not a boolean)
+    ));
 
     setIsInitialized(true);
         

@@ -5,26 +5,33 @@ Controller::Controller()
       motionSensor(1), lightSensor(LightSensorManager()) // Pass pin to MotionSensorManager constructor
 {}
 void Controller::initialize() {
+    if (!SPIFFS.begin(true)) {
+        Serial.println("SPIFFS initialization failed!");
+    }
 
-    M5Dial.Lcd.setBrightness(64);
     Serial.begin(115200);
-    M5.begin();
-    M5Dial.Display.begin();
+
     auto cfg = M5.config();
     cfg.serial_baudrate = 115200;
     M5Dial.begin(cfg, true, true);
 
-    motionSensor.initialize();  // Initialize the motion sensor
+    lightSensor.begin();
+
+    motionSensor.initialize(); 
+
     bluetoothManager.initialize();
+
+    esp_sleep_enable_ext0_wakeup((gpio_num_t)GPIO_NUM_1, HIGH);
+
+    displayManager.setBrightness(lightSensor.scaleBrightness());
+
     M5Dial.Lcd.setTextSize(5);
     M5Dial.Lcd.setTextColor(BLACK);
     M5Dial.Lcd.fillScreen(WHITE);
     M5Dial.Lcd.setCursor(10, 120);
     M5Dial.Lcd.print("SMIW <3");
-    lightSensor.begin();
-    delay(1000);
 
-    esp_sleep_enable_ext0_wakeup((gpio_num_t)GPIO_NUM_1, HIGH);
+    delay(1000);
 }
 
 void Controller::run() { 

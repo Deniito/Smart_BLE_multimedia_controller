@@ -1,5 +1,4 @@
 #include "headers/MotionSensorManager.h"
-#include "M5Dial.h"
 
 MotionSensorManager::MotionSensorManager(int pin)
     : pirSensorPin(pin), lastMotionTime(0), motionDetected(false) {}

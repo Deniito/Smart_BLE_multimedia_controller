@@ -1,5 +1,7 @@
 #pragma once
+
 #include "headers/ShortcutIcon.h"
+#include "headers/MediaControlIcon.h"
 #include "headers/MenuState.h"
 #include "headers/DisplayManager.h"
 #include "headers/VolumeControlIcon.h"

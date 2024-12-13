@@ -1,19 +1,17 @@
 #include "headers/VolumeControlIcon.h"
 #include "headers/DisplayManager.h"
 
-VolumeControlIcon::VolumeControlIcon(int x, int y, int radius, uint16_t color, const std::string& imagePath)
-    : RenderObject(x, y, color), radius(radius), imagePath(imagePath),
-      bluetoothManager(BluetoothManager::getInstance())
+VolumeControlIcon::VolumeControlIcon(int x, int y, int radius, uint16_t mainColor, uint16_t backgroundColor, 
+                                           const std::string& imagePath)
+    : RenderObject(x, y, radius, mainColor, backgroundColor, imagePath, ""), // Initialize base class with main and background colors
+      bluetoothManager(BluetoothManager::getInstance()) // Initialize BluetoothManager instance
 {
 }
-void VolumeControlIcon::render() {
-    if (isSelected()) {
-        M5.Lcd.fillCircle(x, y, radius+5, M5Dial.Lcd.color565(100, 100, 100));
-    } else {
-        M5.Lcd.fillCircle(x, y, radius, M5Dial.Lcd.color565(100, 100, 100));
-    }
 
-    M5.Lcd.fillRect(x-(radius/2), y-(radius/2), radius, radius, this->color);  // Placeholder for the image
+VolumeControlIcon::VolumeControlIcon(int x, int y, int radius, const std::string& imagePath)
+    : RenderObject(x, y, radius, imagePath, ""), // Initialize base class with image path
+      bluetoothManager(BluetoothManager::getInstance()) // Initialize BluetoothManager instance
+{
 }
 
 void VolumeControlIcon::use(DisplayManager &displayManager) {
@@ -35,10 +33,6 @@ void VolumeControlIcon::use(DisplayManager &displayManager) {
     delay(1000);
 }
 
-void VolumeControlIcon::increaseSize(int amount)
-{
-    this->radius += amount;
-}
 
 int VolumeControlIcon::getRadius() const
 {

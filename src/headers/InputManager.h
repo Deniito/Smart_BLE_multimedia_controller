@@ -1,6 +1,10 @@
 #pragma once
+
+#include "FS.h"
+#include "SPIFFS.h"
+#include <SD.h>
 #include <M5Dial.h>
-#include <M5Unified.h>
+
 #include <memory>
 
 class MenuState;  // Forward declaration to avoid cyclic dependency

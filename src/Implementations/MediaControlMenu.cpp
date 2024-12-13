@@ -8,34 +8,43 @@ void MediaControlMenu::initialize(DisplayManager &displayManager)
         if (!isInitialized()) {  // Check if the menu is already initialized
         const auto& iconCords = displayManager.getItemsCords();  // Access the icon coordinates
 
-        renderObjects.push_back(std::make_shared<ShortcutIcon>(
-                220, 120, 15,
-                M5.Lcd.color565(255, 0, 0), 
-                "/icons/icon" + std::to_string(2 + 1) + ".bmp",
-                std::vector<unsigned int>{'N'}));
-        
-        renderObjects.push_back(std::make_shared<ShortcutIcon>(
-                120, 120, 45, 
-                M5.Lcd.color565(255, 0, 0), 
-                "/icons/icon" + std::to_string(2 + 1) + ".bmp",
-                std::vector<unsigned int>{KEY_MEDIA_STOP[1]}));
-        
-        renderObjects.push_back(std::make_shared<MenuChangeIcon>(
-                120, 20, 15,
-                M5.Lcd.color565(0, 255, 0), 
-                "/icons/icon" + std::to_string(2 + 1) + ".bmp",
-                "MainMenu"));
+        // For MediaControlIcon objects
+        renderObjects.push_back(std::make_shared<MediaControlIcon>(
+            220, 120, 15,                                // x, y, radius
+            "",                                          // imagePath (empty string)
+            "",                                          // selectedImagePath (empty string)
+            KEY_MEDIA_NEXT_TRACK                          // key (e.g., 'N')
+        ));
 
-        renderObjects.push_back(std::make_shared<ShortcutIcon>(
-                20, 120, 15,
-                M5.Lcd.color565(255, 0, 0), 
-                "/icons/icon" + std::to_string(2 + 1) + ".bmp",
-                std::vector<unsigned int>{'N'}));
-                
+        renderObjects.push_back(std::make_shared<MediaControlIcon>(
+            120, 120, 45,                                // x, y, radius
+            "",                                          // imagePath (empty string)
+            "",                                          // selectedImagePath (empty string)
+            KEY_MEDIA_PLAY_PAUSE                        // key (e.g., stop key)
+        ));
+
+        // For MenuChangeIcon
+        renderObjects.push_back(std::make_shared<MenuChangeIcon>(
+            120, 20, 15,                                 // x, y, radius
+            "/Back_not_selected.png",                    // imagePath (image path)
+            "/Back_selected.png",                        // selectedImagePath (selected menu name)
+            "MainMenu"                                   // newMenuName (new menu name)
+        ));
+
+        // For another MediaControlIcon
+        renderObjects.push_back(std::make_shared<MediaControlIcon>(
+            20, 120, 15,                                 // x, y, radius
+            "",                                          // imagePath (empty string)
+            "",                                          // selectedImagePath (empty string)
+            KEY_MEDIA_PREVIOUS_TRACK                     // key (e.g., 'N')
+        ));
+
+        // For VolumeControlIcon objects
         renderObjects.push_back(std::make_shared<VolumeControlIcon>(
-                120, 220, 15,
-                M5.Lcd.color565(0, 0, 255), 
-                "path/to/image.png"));
+            120, 220, 15,                                // x, y, radius
+            ""                                           // imagePath (empty string)
+        ));
+
 
         setIsInitialized(true);  // Mark the menu as initialized
     }

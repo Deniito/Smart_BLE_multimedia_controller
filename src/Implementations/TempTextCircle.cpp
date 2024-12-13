@@ -20,16 +20,18 @@ void TempTextCircle::render() {
     std::string unit = isCelsius ? "C" : "F";
 
     if (isSelected())
-        M5.Lcd.fillCircle(x, y, radius + 5, color);
+        M5.Lcd.fillCircle(x, y, radius + 5, mainColor);
     else
-        M5.Lcd.fillCircle(x, y, radius, color);
+        M5.Lcd.fillCircle(x, y, radius, mainColor);
 
-    M5.Lcd.setTextSize(2);
-    M5.Lcd.setTextColor(M5.Lcd.color565(100, 95, 92), color);
+    M5.Lcd.setTextSize(1.3);
+    M5.Lcd.setTextColor(iconBackgroundColor, mainColor);
     M5.Lcd.setTextDatum(CC_DATUM);
 
+    M5.Lcd.setFont(&Orbitron_Light_24);
+
     std::ostringstream tempText;
-    tempText.precision(2);
+    tempText.precision(1);
     tempText << std::fixed << displayTemp << "o" << unit;
 
     M5.Lcd.drawString(tempText.str().c_str(), x, y);

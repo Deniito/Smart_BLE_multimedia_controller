@@ -1,8 +1,11 @@
 #pragma once
-#include "BluetoothManager.h"
-#include "RenderObject.h"
+
+
 #include <string>
 #include <vector>
+
+#include "BluetoothManager.h"
+#include "RenderObject.h"
 #include "DisplayManager.h"
 
 class BluetoothManager;
@@ -10,19 +13,18 @@ class BluetoothManager;
 class ShortcutIcon : public RenderObject {
 private:
     std::vector<unsigned int> keys;
-    std::string imagePath;  // Path to the image or icon file
-    int radius;  // Radius of the circle
+    
     BluetoothManager& bluetoothManager;
 public:
-    // Constructor to initialize position, radius, color, and image path
-    ShortcutIcon(int x, int y, int radius, uint16_t color, const std::string& imagePath, const std::vector<unsigned int>& customKeys);
-    // Override render method to draw the circle border and the image
-    void render() override;
+    ShortcutIcon(int x, int y, int radius, uint16_t mainColor, uint16_t backgroundColor,
+                const std::string& imagePath, const std::string& selectedImagePath, 
+                const std::vector<unsigned int>& customKeys);
+                
+    ShortcutIcon(int x, int y, int radius,const std::string& imagePath, 
+                const std::string& selectedImagePath, 
+                const std::vector<unsigned int>& customKeys);
 
     void use(DisplayManager& displayManager) override;
-
-    // Increase the radius of the circle and adjust the image size accordingly
-    void increaseSize(int amount) override;
 
     // Getter for radius
     int getRadius() const;
